@@ -2,7 +2,7 @@
 Ukázkový projekt
 
 Vytvoření DB:  
-`sqlcmd -S [název SQL server/instance] -i SQLScript.sql`
+`sqlcmd -S [název SQL server/instance] -i SQLScript.sql`  
 (za předpokladu, že stojím v adresáři, kde se nachází script)
 
 Import dat z excelu:  
