@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OZPXMLImportModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Pojistovna">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazev" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Zkratka" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PoskytovatelZdravotnichSluzeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazev" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="TypPZSId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Smlouva">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PoskytovatelZdravotnichSluzebId" Type="int" Nullable="false" />
+          <Property Name="PojistovnaId" Type="int" Nullable="false" />
+          <Property Name="DatumOd" Type="date" Nullable="false" />
+          <Property Name="DatumDo" Type="date" />
+          <Property Name="TypSmlouvyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypPZS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kod" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nazev" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="DatumOd" Type="date" Nullable="false" />
+          <Property Name="DatumDo" Type="date" />
+        </EntityType>
+        <EntityType Name="TypSmlouvy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kod" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nazev" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="DatumOd" Type="date" Nullable="false" />
+          <Property Name="DatumDo" Type="date" />
+        </EntityType>
+        <Association Name="FK_PoskytovatelZdravotnichSluzeb_TypPZS">
+          <End Role="TypPZS" Type="Self.TypPZS" Multiplicity="1" />
+          <End Role="PoskytovatelZdravotnichSluzeb" Type="Self.PoskytovatelZdravotnichSluzeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypPZS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PoskytovatelZdravotnichSluzeb">
+              <PropertyRef Name="TypPZSId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Smlouva_Pojistovna">
+          <End Role="Pojistovna" Type="Self.Pojistovna" Multiplicity="1" />
+          <End Role="Smlouva" Type="Self.Smlouva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pojistovna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Smlouva">
+              <PropertyRef Name="PojistovnaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Smlouva_PoskytovatelZdravotnichSluzeb">
+          <End Role="PoskytovatelZdravotnichSluzeb" Type="Self.PoskytovatelZdravotnichSluzeb" Multiplicity="1" />
+          <End Role="Smlouva" Type="Self.Smlouva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PoskytovatelZdravotnichSluzeb">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Smlouva">
+              <PropertyRef Name="PoskytovatelZdravotnichSluzebId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Smlouva_TypSmlouvy">
+          <End Role="TypSmlouvy" Type="Self.TypSmlouvy" Multiplicity="1" />
+          <End Role="Smlouva" Type="Self.Smlouva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypSmlouvy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Smlouva">
+              <PropertyRef Name="TypSmlouvyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetListOfSmlouva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="datum" Type="date" Mode="In" />
+        </Function>
+        <EntityContainer Name="OZPXMLImportModelStoreContainer">
+          <EntitySet Name="Pojistovna" EntityType="Self.Pojistovna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PoskytovatelZdravotnichSluzeb" EntityType="Self.PoskytovatelZdravotnichSluzeb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Smlouva" EntityType="Self.Smlouva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypPZS" EntityType="Self.TypPZS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypSmlouvy" EntityType="Self.TypSmlouvy" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PoskytovatelZdravotnichSluzeb_TypPZS" Association="Self.FK_PoskytovatelZdravotnichSluzeb_TypPZS">
+            <End Role="TypPZS" EntitySet="TypPZS" />
+            <End Role="PoskytovatelZdravotnichSluzeb" EntitySet="PoskytovatelZdravotnichSluzeb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Smlouva_Pojistovna" Association="Self.FK_Smlouva_Pojistovna">
+            <End Role="Pojistovna" EntitySet="Pojistovna" />
+            <End Role="Smlouva" EntitySet="Smlouva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Smlouva_PoskytovatelZdravotnichSluzeb" Association="Self.FK_Smlouva_PoskytovatelZdravotnichSluzeb">
+            <End Role="PoskytovatelZdravotnichSluzeb" EntitySet="PoskytovatelZdravotnichSluzeb" />
+            <End Role="Smlouva" EntitySet="Smlouva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Smlouva_TypSmlouvy" Association="Self.FK_Smlouva_TypSmlouvy">
+            <End Role="TypSmlouvy" EntitySet="TypSmlouvy" />
+            <End Role="Smlouva" EntitySet="Smlouva" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OZPXMLImportModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Pojistovna">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nazev" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Zkratka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Smlouva" Relationship="Self.FK_Smlouva_Pojistovna" FromRole="Pojistovna" ToRole="Smlouva" />
+        </EntityType>
+        <EntityType Name="PoskytovatelZdravotnichSluzeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nazev" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypPZSId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TypPZS" Relationship="Self.FK_PoskytovatelZdravotnichSluzeb_TypPZS" FromRole="PoskytovatelZdravotnichSluzeb" ToRole="TypPZS" />
+          <NavigationProperty Name="Smlouva" Relationship="Self.FK_Smlouva_PoskytovatelZdravotnichSluzeb" FromRole="PoskytovatelZdravotnichSluzeb" ToRole="Smlouva" />
+        </EntityType>
+        <EntityType Name="Smlouva">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PoskytovatelZdravotnichSluzebId" Type="Int32" Nullable="false" />
+          <Property Name="PojistovnaId" Type="Int32" Nullable="false" />
+          <Property Name="DatumOd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DatumDo" Type="DateTime" Precision="0" />
+          <Property Name="TypSmlouvyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pojistovna" Relationship="Self.FK_Smlouva_Pojistovna" FromRole="Smlouva" ToRole="Pojistovna" />
+          <NavigationProperty Name="PoskytovatelZdravotnichSluzeb" Relationship="Self.FK_Smlouva_PoskytovatelZdravotnichSluzeb" FromRole="Smlouva" ToRole="PoskytovatelZdravotnichSluzeb" />
+          <NavigationProperty Name="TypSmlouvy" Relationship="Self.FK_Smlouva_TypSmlouvy" FromRole="Smlouva" ToRole="TypSmlouvy" />
+        </EntityType>
+        <EntityType Name="TypPZS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Kod" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nazev" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DatumOd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DatumDo" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="PoskytovatelZdravotnichSluzeb" Relationship="Self.FK_PoskytovatelZdravotnichSluzeb_TypPZS" FromRole="TypPZS" ToRole="PoskytovatelZdravotnichSluzeb" />
+        </EntityType>
+        <EntityType Name="TypSmlouvy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Kod" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nazev" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DatumOd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DatumDo" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Smlouva" Relationship="Self.FK_Smlouva_TypSmlouvy" FromRole="TypSmlouvy" ToRole="Smlouva" />
+        </EntityType>
+        <Association Name="FK_Smlouva_Pojistovna">
+          <End Role="Pojistovna" Type="Self.Pojistovna" Multiplicity="1" />
+          <End Role="Smlouva" Type="Self.Smlouva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pojistovna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Smlouva">
+              <PropertyRef Name="PojistovnaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PoskytovatelZdravotnichSluzeb_TypPZS">
+          <End Role="TypPZS" Type="Self.TypPZS" Multiplicity="1" />
+          <End Role="PoskytovatelZdravotnichSluzeb" Type="Self.PoskytovatelZdravotnichSluzeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypPZS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PoskytovatelZdravotnichSluzeb">
+              <PropertyRef Name="TypPZSId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Smlouva_PoskytovatelZdravotnichSluzeb">
+          <End Role="PoskytovatelZdravotnichSluzeb" Type="Self.PoskytovatelZdravotnichSluzeb" Multiplicity="1" />
+          <End Role="Smlouva" Type="Self.Smlouva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PoskytovatelZdravotnichSluzeb">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Smlouva">
+              <PropertyRef Name="PoskytovatelZdravotnichSluzebId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Smlouva_TypSmlouvy">
+          <End Role="TypSmlouvy" Type="Self.TypSmlouvy" Multiplicity="1" />
+          <End Role="Smlouva" Type="Self.Smlouva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypSmlouvy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Smlouva">
+              <PropertyRef Name="TypSmlouvyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OZPXMLImportEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pojistovna" EntityType="Self.Pojistovna" />
+          <EntitySet Name="PoskytovatelZdravotnichSluzeb" EntityType="Self.PoskytovatelZdravotnichSluzeb" />
+          <EntitySet Name="Smlouva" EntityType="Self.Smlouva" />
+          <EntitySet Name="TypPZS" EntityType="Self.TypPZS" />
+          <EntitySet Name="TypSmlouvy" EntityType="Self.TypSmlouvy" />
+          <AssociationSet Name="FK_Smlouva_Pojistovna" Association="Self.FK_Smlouva_Pojistovna">
+            <End Role="Pojistovna" EntitySet="Pojistovna" />
+            <End Role="Smlouva" EntitySet="Smlouva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PoskytovatelZdravotnichSluzeb_TypPZS" Association="Self.FK_PoskytovatelZdravotnichSluzeb_TypPZS">
+            <End Role="TypPZS" EntitySet="TypPZS" />
+            <End Role="PoskytovatelZdravotnichSluzeb" EntitySet="PoskytovatelZdravotnichSluzeb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Smlouva_PoskytovatelZdravotnichSluzeb" Association="Self.FK_Smlouva_PoskytovatelZdravotnichSluzeb">
+            <End Role="PoskytovatelZdravotnichSluzeb" EntitySet="PoskytovatelZdravotnichSluzeb" />
+            <End Role="Smlouva" EntitySet="Smlouva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Smlouva_TypSmlouvy" Association="Self.FK_Smlouva_TypSmlouvy">
+            <End Role="TypSmlouvy" EntitySet="TypSmlouvy" />
+            <End Role="Smlouva" EntitySet="Smlouva" />
+          </AssociationSet>
+          <FunctionImport Name="GetListOfSmlouva" ReturnType="Collection(OZPXMLImportModel.GetListOfSmlouva_Result)">
+            <Parameter Name="datum" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetListOfSmlouva_Result">
+          <Property Type="Int32" Name="IdSmlouvy" Nullable="false" />
+          <Property Type="String" Name="NazevPZS" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="KodTypuPZS" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PojistovnaNazev" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="PojistovnaZkratka" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TypSmlouvyKod" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TypSmlouvyNazev" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="DatumOd" Nullable="false" />
+          <Property Type="DateTime" Name="DatumDo" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OZPXMLImportModelStoreContainer" CdmEntityContainer="OZPXMLImportEntities">
+          <EntitySetMapping Name="Pojistovna">
+            <EntityTypeMapping TypeName="OZPXMLImportModel.Pojistovna">
+              <MappingFragment StoreEntitySet="Pojistovna">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="Zkratka" ColumnName="Zkratka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PoskytovatelZdravotnichSluzeb">
+            <EntityTypeMapping TypeName="OZPXMLImportModel.PoskytovatelZdravotnichSluzeb">
+              <MappingFragment StoreEntitySet="PoskytovatelZdravotnichSluzeb">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="TypPZSId" ColumnName="TypPZSId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Smlouva">
+            <EntityTypeMapping TypeName="OZPXMLImportModel.Smlouva">
+              <MappingFragment StoreEntitySet="Smlouva">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PoskytovatelZdravotnichSluzebId" ColumnName="PoskytovatelZdravotnichSluzebId" />
+                <ScalarProperty Name="PojistovnaId" ColumnName="PojistovnaId" />
+                <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+                <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+                <ScalarProperty Name="TypSmlouvyId" ColumnName="TypSmlouvyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypPZS">
+            <EntityTypeMapping TypeName="OZPXMLImportModel.TypPZS">
+              <MappingFragment StoreEntitySet="TypPZS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+                <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypSmlouvy">
+            <EntityTypeMapping TypeName="OZPXMLImportModel.TypSmlouvy">
+              <MappingFragment StoreEntitySet="TypSmlouvy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+                <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetListOfSmlouva" FunctionName="OZPXMLImportModel.Store.GetListOfSmlouva">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OZPXMLImportModel.GetListOfSmlouva_Result">
+                <ScalarProperty Name="IdSmlouvy" ColumnName="IdSmlouvy" />
+                <ScalarProperty Name="NazevPZS" ColumnName="NazevPZS" />
+                <ScalarProperty Name="KodTypuPZS" ColumnName="KodTypuPZS" />
+                <ScalarProperty Name="PojistovnaNazev" ColumnName="PojistovnaNazev" />
+                <ScalarProperty Name="PojistovnaZkratka" ColumnName="PojistovnaZkratka" />
+                <ScalarProperty Name="TypSmlouvyKod" ColumnName="TypSmlouvyKod" />
+                <ScalarProperty Name="TypSmlouvyNazev" ColumnName="TypSmlouvyNazev" />
+                <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+                <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

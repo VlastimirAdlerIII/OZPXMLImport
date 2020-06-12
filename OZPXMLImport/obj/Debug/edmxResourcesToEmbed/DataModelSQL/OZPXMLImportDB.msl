@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OZPXMLImportModelStoreContainer" CdmEntityContainer="OZPXMLImportEntities">
+    <EntitySetMapping Name="Pojistovna">
+      <EntityTypeMapping TypeName="OZPXMLImportModel.Pojistovna">
+        <MappingFragment StoreEntitySet="Pojistovna">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+          <ScalarProperty Name="Zkratka" ColumnName="Zkratka" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PoskytovatelZdravotnichSluzeb">
+      <EntityTypeMapping TypeName="OZPXMLImportModel.PoskytovatelZdravotnichSluzeb">
+        <MappingFragment StoreEntitySet="PoskytovatelZdravotnichSluzeb">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+          <ScalarProperty Name="TypPZSId" ColumnName="TypPZSId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Smlouva">
+      <EntityTypeMapping TypeName="OZPXMLImportModel.Smlouva">
+        <MappingFragment StoreEntitySet="Smlouva">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PoskytovatelZdravotnichSluzebId" ColumnName="PoskytovatelZdravotnichSluzebId" />
+          <ScalarProperty Name="PojistovnaId" ColumnName="PojistovnaId" />
+          <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+          <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+          <ScalarProperty Name="TypSmlouvyId" ColumnName="TypSmlouvyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypPZS">
+      <EntityTypeMapping TypeName="OZPXMLImportModel.TypPZS">
+        <MappingFragment StoreEntitySet="TypPZS">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Kod" ColumnName="Kod" />
+          <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+          <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+          <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypSmlouvy">
+      <EntityTypeMapping TypeName="OZPXMLImportModel.TypSmlouvy">
+        <MappingFragment StoreEntitySet="TypSmlouvy">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Kod" ColumnName="Kod" />
+          <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+          <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+          <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetListOfSmlouva" FunctionName="OZPXMLImportModel.Store.GetListOfSmlouva">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OZPXMLImportModel.GetListOfSmlouva_Result">
+          <ScalarProperty Name="IdSmlouvy" ColumnName="IdSmlouvy" />
+          <ScalarProperty Name="NazevPZS" ColumnName="NazevPZS" />
+          <ScalarProperty Name="KodTypuPZS" ColumnName="KodTypuPZS" />
+          <ScalarProperty Name="PojistovnaNazev" ColumnName="PojistovnaNazev" />
+          <ScalarProperty Name="PojistovnaZkratka" ColumnName="PojistovnaZkratka" />
+          <ScalarProperty Name="TypSmlouvyKod" ColumnName="TypSmlouvyKod" />
+          <ScalarProperty Name="TypSmlouvyNazev" ColumnName="TypSmlouvyNazev" />
+          <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+          <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

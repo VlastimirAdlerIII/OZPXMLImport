@@ -1,0 +1,14 @@
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\bin\Debug\XMLSerializerOutput.xml
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\bin\Debug\Data.xlsx
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\bin\Debug\SQLScript.sql
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\bin\Debug\OZPXMLImport.exe.config
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\bin\Debug\OZPXMLImport.exe
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\bin\Debug\OZPXMLImport.pdb
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\bin\Debug\EntityFramework.dll
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\bin\Debug\EntityFramework.xml
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\obj\Debug\OZPXMLImport.csproj.CoreCompileInputs.cache
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\obj\Debug\OZPXMLImport.csproj.CopyComplete
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\obj\Debug\OZPXMLImport.exe
+C:\Users\VA3\source\repos\OZP-XML-Import\OZPXMLImport\obj\Debug\OZPXMLImport.pdb

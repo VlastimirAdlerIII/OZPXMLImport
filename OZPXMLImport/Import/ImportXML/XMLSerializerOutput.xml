@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Davka xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypyPZS>
+    <TypPZS>
+      <Kod>P4</Kod>
+      <Nazev>Anesteziolog</Nazev>
+      <DatumOd>2020-06-01T00:00:00</DatumOd>
+      <DatumDo xsi:nil="true" />
+    </TypPZS>
+    <TypPZS>
+      <Kod>P5</Kod>
+      <Nazev>Chirurg</Nazev>
+      <DatumOd>2020-06-01T00:00:00</DatumOd>
+      <DatumDo xsi:nil="true" />
+    </TypPZS>
+  </TypyPZS>
+  <PoskytovateleZdravotnichSluzeb>
+    <PoskytovatelZdravotnichSluzeb>
+      <Nazev>FN U svaté Anny</Nazev>
+      <TypPZS>P4</TypPZS>
+    </PoskytovatelZdravotnichSluzeb>
+    <PoskytovatelZdravotnichSluzeb>
+      <Nazev>FN U svaté Anny</Nazev>
+      <TypPZS>P1</TypPZS>
+    </PoskytovatelZdravotnichSluzeb>
+  </PoskytovateleZdravotnichSluzeb>
+  <TypySmlouvy>
+    <TypSmlouvy>
+      <Kod>A003</Kod>
+      <Nazev>Smlouva o vyšetření</Nazev>
+      <DatumOd>2020-06-01T00:00:00</DatumOd>
+      <DatumDo xsi:nil="true" />
+    </TypSmlouvy>
+  </TypySmlouvy>
+  <Pojistovny>
+    <Pojistovna>
+      <Nazev>Oborová zdravotní pojišťovna zaměstnanců bank, pojišťoven a stavebnictví</Nazev>
+      <Zkratka>OZP</Zkratka>
+    </Pojistovna>
+  </Pojistovny>
+  <Smlouvy>
+    <Smlouva>
+      <PoskytovatelZdravotnichSluzebNazev>FN U svaté Anny</PoskytovatelZdravotnichSluzebNazev>
+      <PoskytovatelZdravotnichSluzebTypPZS>P4</PoskytovatelZdravotnichSluzebTypPZS>
+      <PojistovnaZkratka>OZP</PojistovnaZkratka>
+      <TypSmlouvy>A003</TypSmlouvy>
+      <DatumOd>2020-06-01T00:00:00</DatumOd>
+      <DatumDo xsi:nil="true" />
+    </Smlouva>
+    <Smlouva>
+      <PoskytovatelZdravotnichSluzebNazev>MDDr. Pavel Zoubek</PoskytovatelZdravotnichSluzebNazev>
+      <PoskytovatelZdravotnichSluzebTypPZS>P1</PoskytovatelZdravotnichSluzebTypPZS>
+      <PojistovnaZkratka>VZP</PojistovnaZkratka>
+      <TypSmlouvy>A002</TypSmlouvy>
+      <DatumOd>2020-06-01T00:00:00</DatumOd>
+      <DatumDo xsi:nil="true" />
+    </Smlouva>
+  </Smlouvy>
+</Davka>
