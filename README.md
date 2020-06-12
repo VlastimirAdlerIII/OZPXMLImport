@@ -23,4 +23,5 @@ Chybí především:
 - logování činnosti do souboru/na konzoli
 
 Kontrola překrývání intervalů by potřebovala upřesnit zadání, vyrobil jsem ji podle vlastního uvážení.  
-Nevhodnou tvorbou vstupních dat se člověk může dostat do potíží, i tady by bylo potřeba vyjasnit si zadání
+Nevhodnou tvorbou vstupních dat se člověk může dostat do potíží, i tady by bylo potřeba vyjasnit si zadání.  
+Do repository jsem uložil úplně všechno - i to, co sem nepatří :-)
